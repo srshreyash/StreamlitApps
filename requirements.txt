@@ -7,5 +7,4 @@ datetime
 calmap
 calplot
 plotly_calplot
-mpl_toolkits.axes_grid1.axes_divider
-
+mpl_toolkits
