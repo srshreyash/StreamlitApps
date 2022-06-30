@@ -1,7 +1,6 @@
 matplotlib
 seaborn
 datetime
-mpl_toolkits.axes_grid1.axes_divider
 calmap
 calplot
 plotly_calplotv
