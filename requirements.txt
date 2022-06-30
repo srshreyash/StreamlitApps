@@ -3,5 +3,5 @@ seaborn
 datetime
 calmap
 calplot
-plotly
+plotly_calplot
 
