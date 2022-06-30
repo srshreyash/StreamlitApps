@@ -1,2 +1,3 @@
 import streamlit as st
-st.write("SRS Welcomes you!")
+srs = "I Am Loving It!"
+st.write("SRS Welcomes you!",srs)
