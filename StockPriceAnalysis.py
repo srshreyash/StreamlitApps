@@ -1,1 +1,2 @@
-print("SRS Welcomes you!")
+import streamlit as st
+st.write("SRS Welcomes you!")
