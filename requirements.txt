@@ -1,0 +1,10 @@
+streamlit
+numpy
+pandas
+matplotlib
+seaborn
+datetime
+calmap
+calplot
+plotly_calplot
+Yahoo-fin
