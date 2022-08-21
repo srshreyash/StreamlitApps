@@ -57,7 +57,7 @@ with sidebar.expander("Expand for Finding Minimums Every Month"):
         "Please select the Time Period for analysis",
         value = (d[0], d[1]),
         min_value = datetime.date(2001, 1, 1),
-        max_value = datetime.date.today(), key = "daterange")
+        max_value = datetime.date.today(), key = "daterange2")
     find_min = minform.form_submit_button(label='Find Minimums')
 
 with sidebar.expander("Expand for Finding SIP"):
