@@ -9,7 +9,3 @@ calplot
 plotly_calplot
 Yahoo-fin
 cufflinks
-base64
-PIL
-io
-plotly
