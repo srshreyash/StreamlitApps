@@ -278,7 +278,7 @@ try:
         progress_bar.empty()
         for ax in axs.flat[len(yearlist):]:
             ax.remove()
-        st.info("If you can see the running icon on top right corner of the webpage, please sit tight. It means that the cahrts are loading.")
+        st.info("If you can see the running icon on top right corner of the webpage, please sit tight. It means that the charts are loading.")
         st.pyplot(fig)
         monthlist = [1,2,3,4,5,6,7,8,9,10,11,12]
         fig, axs = plt.subplots(6,2, figsize=(20, figheight*0.8), facecolor='w', edgecolor='k')
