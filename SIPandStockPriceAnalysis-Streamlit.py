@@ -353,4 +353,4 @@ try:
         st.dataframe(returnsdf)
         st.info("All the values are in ₹ (Indian Rupees - INR)")
 except Exception as exception:
-    st.write(exception)
+    st.write("")
