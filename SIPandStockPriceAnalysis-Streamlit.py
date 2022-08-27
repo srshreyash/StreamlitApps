@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 import cufflinks as cf
 
 try:
-    st.markdown("[![Title](https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg)](https://brand.linkedin.com/downloads)")
+    #st.markdown("[![Title](https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg)](https://brand.linkedin.com/downloads)")
     cf.go_offline()
     cf.set_config_file(offline=False, world_readable=True)
 
