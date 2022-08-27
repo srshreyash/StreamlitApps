@@ -9,3 +9,4 @@ calplot
 plotly_calplot
 Yahoo-fin
 cufflinks
+plotly
