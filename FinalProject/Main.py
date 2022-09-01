@@ -78,18 +78,22 @@ if train_all:
     st.write("Please find the results of ARIMA modelling below: ")
     start_time = time.time()
     model_path = path+'/SavedModels/ARIMA_model.pkl'
+    st.write(f"First MODEL_PATH = {model_path}")
     model_path = "FinalProject/SavedModels/ARIMA_model.pkl"
+    st.write(f"Updated Second MODEL_PATH = {model_path}")
     auto_arima(model_path = model_path, use_predefined_metrics = predef)
     st.write("Total Time taken : %s seconds" % (time.time() - start_time))
     st.header("FBProphet Modelling: ")
     st.write("Please find the results of FBProphet modelling below: ")
     start_time = time.time()
     model_path = path+'/SavedModels/FBProphet_model.pkl'
+    st.write(f"FBProphet third MODEL_PATH = {model_path}")
     fb_prophet(model_path = model_path, use_predefined_metrics = predef)
     st.write("Total Time taken : %s seconds" % (time.time() - start_time))
     st.header("LSTM Modelling: ")
     st.write("Please find the results of LSTM modelling below: ")
     start_time = time.time()
     model_path = path+'/SavedModels'
+    st.write(f"LSTM Fourth MODEL_PATH = {model_path}")
     LSTM_Model(model_path = model_path, use_predefined_metrics = predef)
     st.write("Total Time taken : %s seconds" % (time.time() - start_time))
