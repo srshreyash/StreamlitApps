@@ -78,6 +78,7 @@ if train_all:
     st.write("Please find the results of ARIMA modelling below: ")
     start_time = time.time()
     model_path = path+'/SavedModels/ARIMA_model.pkl'
+    model_path = "../SavedModels/ARIMA_model.pkl"
     auto_arima(model_path = model_path, use_predefined_metrics = predef)
     st.write("Total Time taken : %s seconds" % (time.time() - start_time))
     st.header("FBProphet Modelling: ")
