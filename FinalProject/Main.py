@@ -79,7 +79,7 @@ if train_all:
     start_time = time.time()
     model_path = path+'/SavedModels/ARIMA_model.pkl'
     st.write(f"First MODEL_PATH = {model_path}")
-    model_path = "FinalProject/SavedModels/ARIMA_model.pkl"
+    #model_path = "FinalProject/SavedModels/ARIMA_model.pkl"
     st.write(f"Updated Second MODEL_PATH = {model_path}")
     auto_arima(model_path = model_path, use_predefined_metrics = predef)
     st.write("Total Time taken : %s seconds" % (time.time() - start_time))

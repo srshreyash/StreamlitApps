@@ -122,11 +122,11 @@ def LSTM_Model(stock_selector = "RELIANCE.NS" , use_predefined_metrics = True, t
     Xtest, ytest = (np.array(Xtest), np.array(ytest))
     Xtest = np.reshape(Xtest, (Xtest.shape[0], Xtest.shape[1], Xtest.shape[2]))
     if use_predefined_metrics:
-        json_file = open(model_path+"\LSTM_model.json", 'r')
+        json_file = open(model_path+"/LSTM_model.json", 'r')
         loaded_model_json = json_file.read()
         json_file.close()
         model = model_from_json(loaded_model_json)
-        model.load_weights(model_path+"\LSTM_model.h5")
+        model.load_weights(model_path+"/LSTM_model.h5")
         model.compile(loss='mean_squared_error', optimizer='adam')#, metrics=['accuracy'])
     if not(use_predefined_metrics):
         model = Sequential()
