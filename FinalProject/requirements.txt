@@ -1,7 +1,6 @@
 datetime
 streamlit
 yahoo_fin
-pickle
 numpy
 pandas
 pmdarima
