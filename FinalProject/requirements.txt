@@ -8,3 +8,4 @@ prophet
 matplotlib
 keras
 scikit-learn
+tensorflow
