@@ -12,7 +12,7 @@ def print_metrics():
     predef_predict_to = "07/18/2022"
     st.write(f"Training period : {predef_train_from} to {predef_train_to}")
     st.write(f"Prediction period : {predef_predict_from} to {predef_predict_to}")
-    st.write("Please click on the Train button below to proceed further")
+    st.write("Please click on the button below to proceed further")
 
 def create_form(all_stocks, formname = "Default", button_label = "Default", disabled = False):
     genericform = st.form(key = formname)
@@ -36,9 +36,35 @@ predef = st.checkbox("Use predefined Metrics", help = "Please select this to use
 if predef:
     print_metrics()
     path = os.path.dirname(__file__)
-    train_all = st.button("Train All")
+    train_all = st.button("Show Results")
 else:
     train_all = False
+    
+if train_all:
+    tab1, tab2, tab3 = st.tabs(["ARIMA", "FBProphet", "LSTM"])
+    with tab1:
+        st.header("ARIMA Modelling: ")
+        st.write("Please find the results of ARIMA modelling below: ")
+        start_time = time.time()
+        model_path = path+'/SavedModels/ARIMA_model.pkl'
+        #model_path = "FinalProject/SavedModels/ARIMA_model.pkl"
+        auto_arima(model_path = model_path, use_predefined_metrics = predef)
+        st.write("Total Time taken : %s seconds" % (time.time() - start_time))
+    with tab2:
+        st.header("FBProphet Modelling: ")
+        st.write("Please find the results of FBProphet modelling below: ")
+        start_time = time.time()
+        model_path = path+'/SavedModels/FBProphet_model.pkl'
+        fb_prophet(model_path = model_path, use_predefined_metrics = predef)
+        st.write("Total Time taken : %s seconds" % (time.time() - start_time))
+    with tab3:
+        st.header("LSTM Modelling: ")
+        st.write("Please find the results of LSTM modelling below: ")
+        start_time = time.time()
+        model_path = path+'/SavedModels'
+        LSTM_Model(model_path = model_path, use_predefined_metrics = predef)
+        st.write("Total Time taken : %s seconds" % (time.time() - start_time))
+
 arima_tab, fbp_tab, LSTM_tab= st.tabs(["ARIMA","FBProphet","LSTM"])
 all_stocks = si.tickers_nifty50()
 
@@ -50,7 +76,6 @@ with arima_tab:
         arimabutton = create_form(all_stocks=all_stocks,formname = "arima", button_label = "Train ARIMA", disabled=False)
         model = None
     if arimabutton:
-        st.write("SRS")
         auto_arima(model_path = model, use_predefined_metrics = predef)
 
 with fbp_tab:
@@ -72,28 +97,3 @@ with LSTM_tab:
         model = None
     if lstmbutton:
         LSTM_Model(model_path = model, use_predefined_metrics = predef)
-    
-if train_all:
-    st.header("ARIMA Modelling: ")
-    st.write("Please find the results of ARIMA modelling below: ")
-    start_time = time.time()
-    model_path = path+'/SavedModels/ARIMA_model.pkl'
-    st.write(f"First MODEL_PATH = {model_path}")
-    #model_path = "FinalProject/SavedModels/ARIMA_model.pkl"
-    st.write(f"Updated Second MODEL_PATH = {model_path}")
-    auto_arima(model_path = model_path, use_predefined_metrics = predef)
-    st.write("Total Time taken : %s seconds" % (time.time() - start_time))
-    st.header("FBProphet Modelling: ")
-    st.write("Please find the results of FBProphet modelling below: ")
-    start_time = time.time()
-    model_path = path+'/SavedModels/FBProphet_model.pkl'
-    st.write(f"FBProphet third MODEL_PATH = {model_path}")
-    fb_prophet(model_path = model_path, use_predefined_metrics = predef)
-    st.write("Total Time taken : %s seconds" % (time.time() - start_time))
-    st.header("LSTM Modelling: ")
-    st.write("Please find the results of LSTM modelling below: ")
-    start_time = time.time()
-    model_path = path+'/SavedModels'
-    st.write(f"LSTM Fourth MODEL_PATH = {model_path}")
-    LSTM_Model(model_path = model_path, use_predefined_metrics = predef)
-    st.write("Total Time taken : %s seconds" % (time.time() - start_time))
