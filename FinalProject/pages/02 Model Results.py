@@ -48,13 +48,15 @@ if train_all:
         start_time = time.time()
         model_path = path+'/SavedModels/ARIMA_model.pkl'
         #model_path = "FinalProject/SavedModels/ARIMA_model.pkl"
+        model_path = "/app/streamlitapps/FinalProject/SavedModels/ARIMA_model.pkl"
         auto_arima(model_path = model_path, use_predefined_metrics = predef)
         st.write("Total Time taken : %s seconds" % (time.time() - start_time))
     with tab2:
         st.header("FBProphet Modelling: ")
         st.write("Please find the results of FBProphet modelling below: ")
         start_time = time.time()
-        model_path = path+'/SavedModels/FBProphet_model.pkl'
+        model_path = path+'/FBProphet_model.pkl'
+        model_path = '/app/streamlitapps/FinalProject/SavedModels/FBProphet_model.pkl'
         fb_prophet(model_path = model_path, use_predefined_metrics = predef)
         st.write("Total Time taken : %s seconds" % (time.time() - start_time))
     with tab3:
@@ -62,6 +64,7 @@ if train_all:
         st.write("Please find the results of LSTM modelling below: ")
         start_time = time.time()
         model_path = path+'/SavedModels'
+        model_path = '/app/streamlitapps/FinalProject/SavedModels'
         LSTM_Model(model_path = model_path, use_predefined_metrics = predef)
         st.write("Total Time taken : %s seconds" % (time.time() - start_time))
 
