@@ -114,7 +114,7 @@ def auto_arima(stock_selector = "RELIANCE.NS", use_predefined_metrics = True, tr
       st.write(pd.DataFrame({"Lower Limit":lower_series, "Predictions":fc_series, "Upper Limit":upper_series}))
 
 def LSTM_Model(stock_selector = "RELIANCE.NS" , use_predefined_metrics = True, traintest_dates=["01/01/2015", "12/31/2021"],
- predict_dates = ["01/01/2022","07/18/2022"], model_path = None, n=10, predict_only = False, show_data = False):
+ predict_dates = ["01/01/2022","07/18/2022"], predict_days = 10, model_path = None, n=10, predict_only = False, show_data = False):
 
     stock = stock_selector
     train_df = get_data(stock, start_date=traintest_dates[0], end_date=traintest_dates[1], index_as_date = True, interval="1d")
@@ -157,8 +157,7 @@ def LSTM_Model(stock_selector = "RELIANCE.NS" , use_predefined_metrics = True, t
         model.compile(loss='mean_squared_error', optimizer='adam')#, metrics=['accuracy'])
     if not(use_predefined_metrics):
         model = Sequential()
-        ##        model.add(LSTM(4, input_shape = (Xtrain.shape[1], Xtrain.shape[2])))
-        ##        model.add(Dense(1))
+
         model.add(LSTM(units = 50, return_sequences = True, input_shape = (Xtrain.shape[1], Xtrain.shape[2])))
         model.add(Dropout(0.2))
 
@@ -185,9 +184,7 @@ def LSTM_Model(stock_selector = "RELIANCE.NS" , use_predefined_metrics = True, t
     testPredict = scaler.inverse_transform(testPredict)
     testPredict = [x[0] for x in testPredict]
     trainScore = mean_squared_error(list(df["close"][n:split]), trainPredict, squared=False)
-    st.write(f"Train Score: {trainScore}")
     testScore = mean_squared_error(list(df["close"][split+n:]), testPredict, squared=False)
-    st.write(f"Test Score: {testScore}")
     dff = pd.DataFrame({"date":list(df.index[n:split]),"actual":list(df["close"][n:split]),"predicted":trainPredict})
     dff = dff.set_index("date")
     if not(predict_only):
@@ -212,16 +209,38 @@ def LSTM_Model(stock_selector = "RELIANCE.NS" , use_predefined_metrics = True, t
       plt.legend()
       tab3.pyplot(fig)
     if predict_only:
-      dff = pd.DataFrame({"date":list(df.index[split+n:]),"actual":list(df["close"][split+n:]),"predicted":testPredict})
+      X_copy = X.tail(10)
+      predictions = []
+      for n in range(predict_days):
+        X_copy = np.array(X_copy).reshape(-1,1)
+        X_copy2 = scaler.fit_transform(X_copy)
+        X_copy2 = np.reshape(X_copy2, (1, X_copy2.shape[0], 1))
+        pred = model.predict(X_copy2)
+        pred = scaler.inverse_transform(pred)
+        X_copy = np.append(X_copy, pred[0][0])
+        X_copy = np.delete(X_copy,0)
+        predictions.append(pred)
+      predictions = [l.tolist() for l in predictions]
+      predictions = [item for sublist in predictions for item in sublist]
+      predic = [p for x in predictions for p in x]
+      from_date = X.tail(1).index
+      frm = [from_date[0] + timedelta(days=n) for n in range(1,predict_days+1)]
+      pred_df = pd.DataFrame({"date":frm, "pred":predic})
+      pred_df.index=pred_df["date"]
+      dff = pd.DataFrame({"date":list(df.index[split+n:]),"actual":list(df["close"][split+n:])})#,"predicted":testPredict})
       dff = dff.set_index("date")
       fig = plt.figure(figsize = (10, 5))
       plt.plot(dff["actual"], label = "Actual")
-      plt.plot(dff["predicted"], label="Predicted")
-      plt.title("Model Performance on Test Data: ")
+      #plt.plot(dff["predicted"], label="Predicted")
+      plt.plot(pred_df["pred"], label= "Forecast")
+      plt.title("Current and Predicted Values")
       plt.legend()
       st.pyplot(fig)
+      fig = plt.figure(figsize = (10, 5))
+      plt.plot(pred_df["pred"], label= "Forecast")
+      st.pyplot(fig)
     if show_data:
-      st.write(dff)
+      st.write(pred_df)
 
 
 def fb_prophet(stock_selector = "RELIANCE.NS" , use_predefined_metrics = True, traintest_dates=["01/01/2015", "12/31/2021"],

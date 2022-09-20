@@ -28,8 +28,8 @@ def create_form(all_stocks, formname = "Default", button_label = "Default", disa
     formbutton = genericform.form_submit_button(label=button_label)
     return formbutton
 
-st.set_page_config(page_title="ML for Time Series Forecasting", page_icon="📈", layout="wide", initial_sidebar_state="collapsed", menu_items=None)
-st.title("Application of Machine Learning Models for Time Series Analysis")
+st.set_page_config(page_title="Model Results", page_icon="📈", layout="wide", initial_sidebar_state="collapsed", menu_items=None)
+st.title("Model Results")
 
 predef = st.checkbox("Use predefined Metrics", help = "Please select this to use the predefined metrics for model training and results")
 
