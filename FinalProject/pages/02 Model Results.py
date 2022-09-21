@@ -31,6 +31,7 @@ def create_form(all_stocks, formname = "Default", button_label = "Default", disa
 st.set_page_config(page_title="Model Results", page_icon="📈", layout="wide", initial_sidebar_state="collapsed", menu_items=None)
 st.title("Model Results")
 
+st.header("Please select the below checkbox to view the predefined metrics and the corresponding model results.")
 predef = st.checkbox("Use predefined Metrics", help = "Please select this to use the predefined metrics for model training and results")
 
 if predef:
