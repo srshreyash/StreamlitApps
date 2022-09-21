@@ -68,35 +68,35 @@ if train_all:
         LSTM_Model(model_path = model_path, use_predefined_metrics = predef)
         st.write("Total Time taken : %s seconds" % (time.time() - start_time))
 
-arima_tab, fbp_tab, LSTM_tab= st.tabs(["ARIMA","FBProphet","LSTM"])
-all_stocks = si.tickers_nifty50()
+# arima_tab, fbp_tab, LSTM_tab= st.tabs(["ARIMA","FBProphet","LSTM"])
+# all_stocks = si.tickers_nifty50()
 
-with arima_tab:
-    if predef:
-        arimabutton = create_form(all_stocks=all_stocks,formname = "arima", button_label = "Train ARIMA", disabled=True)
-        model = "..\SavedModels\ARIMA_model.pkl"
-    if not(predef):
-        arimabutton = create_form(all_stocks=all_stocks,formname = "arima", button_label = "Train ARIMA", disabled=False)
-        model = None
-    if arimabutton:
-        auto_arima(model_path = model, use_predefined_metrics = predef)
+# with arima_tab:
+#     if predef:
+#         arimabutton = create_form(all_stocks=all_stocks,formname = "arima", button_label = "Train ARIMA", disabled=True)
+#         model = "..\SavedModels\ARIMA_model.pkl"
+#     if not(predef):
+#         arimabutton = create_form(all_stocks=all_stocks,formname = "arima", button_label = "Train ARIMA", disabled=False)
+#         model = None
+#     if arimabutton:
+#         auto_arima(model_path = model, use_predefined_metrics = predef)
 
-with fbp_tab:
-    if predef:
-        fbpbutton = create_form(all_stocks=all_stocks,formname = "fbpform", button_label = "Train FBProphet", disabled=True)
-        model = "..\SavedModels\FBProphet_model.pkl"
-    if not(predef):
-        fbpbutton = create_form(all_stocks=all_stocks,formname = "fbpform", button_label = "Train FBProphet", disabled=False)
-        model = None
-    if fbpbutton:
-        fb_prophet(model_path = model, use_predefined_metrics = predef)
+# with fbp_tab:
+#     if predef:
+#         fbpbutton = create_form(all_stocks=all_stocks,formname = "fbpform", button_label = "Train FBProphet", disabled=True)
+#         model = "..\SavedModels\FBProphet_model.pkl"
+#     if not(predef):
+#         fbpbutton = create_form(all_stocks=all_stocks,formname = "fbpform", button_label = "Train FBProphet", disabled=False)
+#         model = None
+#     if fbpbutton:
+#         fb_prophet(model_path = model, use_predefined_metrics = predef)
 
-with LSTM_tab:
-    if predef:
-        lstmbutton = create_form(all_stocks=all_stocks,formname = "LSTMform", button_label = "Train LSTM", disabled = True)
-        model = "..\SavedModels\LSTM_model.pkl"
-    if not(predef):
-        lstmbutton = create_form(all_stocks=all_stocks,formname = "LSTMform", button_label = "Train LSTM", disabled = False)
-        model = None
-    if lstmbutton:
-        LSTM_Model(model_path = model, use_predefined_metrics = predef)
+# with LSTM_tab:
+#     if predef:
+#         lstmbutton = create_form(all_stocks=all_stocks,formname = "LSTMform", button_label = "Train LSTM", disabled = True)
+#         model = "..\SavedModels\LSTM_model.pkl"
+#     if not(predef):
+#         lstmbutton = create_form(all_stocks=all_stocks,formname = "LSTMform", button_label = "Train LSTM", disabled = False)
+#         model = None
+#     if lstmbutton:
+#         LSTM_Model(model_path = model, use_predefined_metrics = predef)
