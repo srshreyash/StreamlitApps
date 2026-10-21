@@ -72,12 +72,12 @@ try:
         
     all_stocks = tickers_nifty50()
 
-    sidebar = st.sidebar
-    sidebar.write("Please select the following checkbox if you would like to analyse your own data. Otherwise, please leave it unchecked.")
-    userfile = sidebar.checkbox("I have my own data file")
+    sidebarv = st.sidebar
+    sidebarv.write("Please select the following checkbox if you would like to analyse your own data. Otherwise, please leave it unchecked.")
+    userfile = sidebarv.checkbox("I have my own data file")
 
     if userfile:
-        uploaded_file = sidebar.file_uploader(label="Please upload the file: ", type=["csv"])
+        uploaded_file = sidebarv.file_uploader(label="Please upload the file: ", type=["csv"])
         indf = pd.read_csv(uploaded_file)
         filename = uploaded_file.name
         filename = filename[:-4]
@@ -86,9 +86,9 @@ try:
         maxdate = max(indf["date"])
 
     if not(userfile):
-        sidebar.header("List of 30 stocks trading in the National Stock Exchange of India is fetched from yahoo and displayed below. Please select one for analysis.")
+        sidebarv.header("List of 30 stocks trading in the National Stock Exchange of India is fetched from yahoo and displayed below. Please select one for analysis.")
 
-    with sidebar.expander("Peek into the data"):
+    with sidebarv.expander("Peek into the data"):
         form = st.form(key='my_form')
         if userfile:
             stock_selector = form.selectbox(
@@ -118,7 +118,7 @@ try:
         show_data = form.checkbox("Show Data",key="showdata")
         data_peek = form.form_submit_button(label='Peek into the data')
 
-    with sidebar.expander("Find dates of occurence of monthly Minimums"):
+    with sidebarv.expander("Find dates of occurence of monthly Minimums"):
         minform = st.form(key='min_form')
         if userfile:
             stock_selector = minform.selectbox(
@@ -140,7 +140,7 @@ try:
                 max_value = datetime.date.today(), key = "daterange2")
         find_min = minform.form_submit_button(label='Find Minimums')
 
-    with sidebar.expander("Find SIP value"):
+    with sidebarv.expander("Find SIP value"):
         sipform = st.form(key="invest")
         if userfile:
             stock_selector = sipform.selectbox(
