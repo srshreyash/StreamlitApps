@@ -66,11 +66,11 @@ try:
                 - **Personal Digital Portfolio** - <a href="https://shreyashrangarajan.wixsite.com/shreyash"> Shreyash's Memoir </a>
                 - **E-Mail ID** - shreyashrangarajan@gmail.com
                 """, unsafe_allow_html=True)
-    #def get_stock_data(ticker, start_date, end_date):
-        #stock_data= get_data(ticker, start_date=start_date.strftime("%m/%d/%Y"), end_date=end_date.strftime("%m/%d/%Y"), index_as_date = False, interval='1d')
-        #return stock_data
+    def get_stock_data(ticker, start_date, end_date):
+        stock_data= get_data(ticker, start_date=start_date.strftime("%m/%d/%Y"), end_date=end_date.strftime("%m/%d/%Y"), index_as_date = False, interval='1d')
+        return stock_data
         
-    #all_stocks = tickers_nifty50()
+    all_stocks = tickers_nifty50()
 
     sidebarv = st.sidebar
     sidebarv.write("Please select the following checkbox if you would like to analyse your own data. Otherwise, please leave it unchecked.")
